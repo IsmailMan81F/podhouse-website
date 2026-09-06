@@ -46,8 +46,9 @@
         font-family: var(--sans);
         overflow-x: hidden;
       }
-      body:has(.menu-open) {
+      body.menu-open {
         overflow: hidden;
+        overscroll-behavior: none;
       }
       a {
         color: inherit;
@@ -870,7 +871,7 @@
           position: fixed;
           inset: 82px 0 0;
           min-height: calc(100svh - 82px);
-          background: rgba(5, 5, 5, 0.84);
+          background: rgba(5, 5, 5, 0.72);
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
           border-top: 1px solid var(--line);
@@ -881,6 +882,7 @@
           transition: transform 0.45s cubic-bezier(0.77, 0, 0.18, 1);
           z-index: 30;
           overflow-y: auto;
+          overscroll-behavior: contain;
           isolation: isolate;
         }
         .menu-open .mobile-menu {
