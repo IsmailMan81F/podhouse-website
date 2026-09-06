@@ -1,0 +1,1575 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="PodHouse Alger, studio podcast et production de contenu haut de gamme à Alger."
+    />
+    <title>PODHOUSE ALGER — La maison du podcast</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap");
+      :root {
+        --black: #050505;
+        --ink: #0b0b0d;
+        --paper: #f4f1ee;
+        --muted: #a8a5a7;
+        --line: rgba(255, 255, 255, 0.14);
+        --pink: #f00078;
+        --violet: #8a00ff;
+        --blue: #4a00ff;
+        --gradient: linear-gradient(
+          110deg,
+          #f00078 0%,
+          #d000a8 44%,
+          #8a00ff 76%,
+          #4a00ff 100%
+        );
+        --sans: "Poppins", Arial, sans-serif;
+        --ui: "Inter", Arial, sans-serif;
+        --mono: var(--sans);
+        --display: var(--sans);
+        --pad: clamp(20px, 5vw, 76px);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        background: var(--black);
+      }
+      body {
+        margin: 0;
+        background: var(--black);
+        color: var(--paper);
+        font-family: var(--sans);
+        overflow-x: hidden;
+      }
+      body:has(.menu-open) {
+        overflow: hidden;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button {
+        font: inherit;
+        color: inherit;
+        border: 0;
+        cursor: pointer;
+      }
+      img,
+      video {
+        display: block;
+        max-width: 100%;
+      }
+      .container {
+        width: min(1280px, calc(100% - var(--pad) * 2));
+        margin: auto;
+      }
+      .eyebrow,
+      .mono {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #d0ccd0;
+      }
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .eyebrow:before {
+        content: "";
+        width: 34px;
+        height: 1px;
+        background: var(--gradient);
+      }
+      .section {
+        padding: clamp(90px, 12vw, 180px) 0;
+        position: relative;
+      }
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 30px;
+        margin-bottom: 72px;
+      }
+      .section-number {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--muted);
+        letter-spacing: 0.15em;
+      }
+      .display {
+        font-family: Helvetica, Arial, sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.05em;
+        line-height: 0.92;
+        text-transform: uppercase;
+        font-size: clamp(46px, 7.3vw, 112px);
+        margin: 16px 0 0;
+      }
+      .display em {
+        font-style: normal;
+        color: transparent;
+        background: var(--gradient);
+        background-clip: text;
+        -webkit-background-clip: text;
+      }
+      .lead {
+        font-size: clamp(16px, 1.5vw, 21px);
+        line-height: 1.55;
+        color: #c4c1c3;
+        max-width: 530px;
+      }
+      .small-copy {
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 24px;
+        padding: 14px 19px;
+        border: 1px solid #fff;
+        border-radius: 9px;
+        background: #9636a8;
+        color: #fff;
+        text-transform: none;
+        font: 700 12px var(--ui);
+        letter-spacing: 0.01em;
+        transition:
+          transform 0.35s,
+          background 0.35s,
+          border-color 0.35s;
+      }
+      .btn:hover,
+      .btn:focus-visible {
+        transform: translateY(-3px);
+        border-color: #fff;
+      }
+      .btn.primary {
+        background: #9636a8;
+        border-color: #fff;
+        color: white;
+      }
+      .btn.primary:hover {
+        background: #782b88;
+        box-shadow: 0 10px 35px rgba(150, 54, 168, 0.3);
+      }
+      .btn .arrow {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+        filter: brightness(0) invert(1);
+        transition: transform 0.3s;
+      }
+      .btn:hover .arrow {
+        transform: translateX(4px);
+      }
+      .brand-logo {
+        display: block;
+        width: 154px;
+        height: auto;
+      }
+      :focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 4px;
+      }
+      .nav {
+        height: 82px;
+        position: fixed;
+        z-index: 20;
+        inset: 0 0 auto;
+        background: transparent;
+        transition:
+          background 0.4s,
+          backdrop-filter 0.4s;
+      }
+      .nav.scrolled {
+        background: rgba(5, 5, 5, 0.84);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--line);
+      }
+      body.menu-open .nav {
+        background: rgba(5, 5, 5, 0.84);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--line);
+      }
+      .nav-inner {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: min(1400px, calc(100% - 42px));
+        margin: auto;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        font-size: 13px;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 29px;
+        margin-left: auto;
+        margin-right: 32px;
+        font: 12px var(--ui);
+        text-transform: none;
+        letter-spacing: 0.01em;
+      }
+      .nav-links a {
+        color: #cbc8ca;
+        transition: color 0.25s;
+      }
+      .nav-links a:hover {
+        color: #fff;
+      }
+      .menu-toggle {
+        display: none;
+        background: none;
+        width: 44px;
+        height: 44px;
+        position: relative;
+      }
+      .menu-toggle span {
+        position: absolute;
+        left: 9px;
+        width: 25px;
+        height: 1px;
+        background: #fff;
+        transition:
+          transform 0.3s,
+          top 0.3s;
+      }
+      .menu-toggle span:first-child {
+        top: 17px;
+      }
+      .menu-toggle span:last-child {
+        top: 26px;
+      }
+      .menu-open .menu-toggle span:first-child {
+        top: 22px;
+        transform: rotate(45deg);
+      }
+      .menu-open .menu-toggle span:last-child {
+        top: 22px;
+        transform: rotate(-45deg);
+      }
+      .mobile-menu {
+        display: none;
+      }
+      .hero {
+        height: max(120svh, 980px);
+        min-height: 980px;
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        overflow: hidden;
+        padding: 82px 0 24vh;
+      }
+      .hero-video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(0.75);
+      }
+      .hero:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.25) 65%),
+          linear-gradient(0deg, rgba(0, 0, 0, 0.85), transparent 60%);
+      }
+      .hero-content {
+        position: relative;
+        z-index: 1;
+      }
+      .hero-title {
+        font-size: clamp(55px, 9vw, 145px);
+        max-width: 1000px;
+        margin: 24px 0 26px;
+      }
+      .hero-copy {
+        max-width: 460px;
+        margin-bottom: 30px;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .hero-actions .btn:not(.primary) {
+        background: transparent;
+      }
+      .scroll-cue {
+        position: absolute;
+        z-index: 2;
+        right: var(--pad);
+        bottom: 9vh;
+        writing-mode: vertical-rl;
+        font: 10px var(--mono);
+        letter-spacing: 0.2em;
+        color: var(--muted);
+        display: flex;
+        gap: 13px;
+        align-items: center;
+      }
+      .scroll-cue:after {
+        content: "";
+        height: 45px;
+        width: 1px;
+        background: var(--gradient);
+      }
+      .experience {
+        background: #09090a;
+      }
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border-top: 1px solid var(--line);
+      }
+      .feature {
+        padding: 31px 24px 20px 0;
+        border-right: 1px solid var(--line);
+        margin-right: 24px;
+      }
+      .feature:last-child {
+        border: 0;
+      }
+      .feature-num {
+        font: 28px var(--mono);
+        color: #6d696d;
+      }
+      .feature h3 {
+        font-size: 15px;
+        letter-spacing: 0.02em;
+        margin: 30px 0 12px;
+      }
+      .feature p {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.6;
+        margin: 0;
+        max-width: 210px;
+      }
+      .feature:before {
+        content: "";
+        display: block;
+        width: 42px;
+        height: 2px;
+        background: var(--gradient);
+      }
+      .studio {
+        background: #050505;
+      }
+      .setup-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 22px;
+      }
+      .setup {
+        position: relative;
+        overflow: hidden;
+        border-radius: 14px;
+        min-height: 320px;
+        background: #111;
+      }
+      .setup:nth-child(1) {
+        grid-row: span 2;
+        min-height: 680px;
+      }
+      .setup:nth-child(4) {
+        grid-column: 1 / -1;
+      }
+      .setup img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition:
+          transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+          filter 0.8s;
+      }
+      .setup:hover img {
+        transform: scale(1.05);
+        filter: brightness(0.72);
+      }
+      .setup-overlay {
+        position: absolute;
+        inset: 0;
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.75), transparent 55%);
+      }
+      .setup-overlay h3 {
+        font-size: 21px;
+        margin: 7px 0;
+      }
+      .setup-overlay p {
+        font-size: 13px;
+        color: #d3d0d1;
+        margin: 0;
+      }
+      .setup-overlay .mono {
+        color: #fff;
+      }
+      .transformation {
+        background: #0b0a0d;
+        overflow: hidden;
+      }
+      .transformation:before {
+        content: "06 / 19";
+        position: absolute;
+        right: 5%;
+        top: 14%;
+        color: rgba(255, 255, 255, 0.08);
+        font: clamp(70px, 17vw, 230px) var(--display);
+        letter-spacing: -0.04em;
+      }
+      .transform-grid {
+        display: grid;
+        grid-template-columns: 1fr 280px 1fr;
+        align-items: center;
+        gap: clamp(35px, 7vw, 110px);
+      }
+      .transform-copy {
+        order: 1;
+      }
+      .transform-copy .lead {
+        margin-top: 25px;
+      }
+      .transform-video-wrap {
+        order: 2;
+        aspect-ratio: 9 / 16;
+        width: 100%;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        background: #111;
+      }
+      .transform-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+      .transform-list {
+        order: 3;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        border-top: 1px solid var(--line);
+      }
+      .transform-list li {
+        padding: 16px 0;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        font: 11px var(--mono);
+        letter-spacing: 0.15em;
+        color: var(--muted);
+      }
+      .transform-list li:first-child {
+        color: #fff;
+      }
+      .transform-list li:first-child:after {
+        content: "01";
+        color: #fff;
+      }
+      .quality {
+        background: var(--paper);
+        color: var(--black);
+      }
+      .quality .eyebrow,
+      .quality .section-number {
+        color: #6b6869;
+      }
+      .quality .display {
+        color: #111;
+      }
+      .quality .lead,
+      .quality .small-copy {
+        color: #5d595b;
+      }
+      .quality-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+        align-items: end;
+      }
+      .quality-images {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 13px;
+        align-items: end;
+      }
+      .quality-images img {
+        width: 100%;
+        height: 420px;
+        object-fit: cover;
+        border-radius: 12px;
+      }
+      .quality-images img:first-child {
+        height: 420px;
+        margin-bottom: 0;
+      }
+      .quality-images img:last-child {
+        height: 300px;
+        margin-bottom: 62px;
+      }
+      .quality-info {
+        padding: 20px 0 20px 8%;
+        border-left: 1px solid #d5d1d0;
+      }
+      .quality-info h3 {
+        font: 14px var(--mono);
+        letter-spacing: 0.12em;
+        margin: 0 0 9px;
+      }
+      .quality-info p {
+        font-size: 14px;
+        line-height: 1.5;
+        color: #666;
+        margin: 0 0 35px;
+        max-width: 330px;
+      }
+      .tech-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border-top: 1px solid #c9c5c4;
+        margin-top: 50px;
+      }
+      .tech-list span {
+        font: 11px var(--mono);
+        padding: 13px 0;
+        border-bottom: 1px solid #c9c5c4;
+        color: #777;
+      }
+      .formats {
+        background: #111;
+        color: #f5f5f5;
+      }
+      .format-list {
+        border-top: 1px solid var(--line);
+      }
+      .format {
+        display: grid;
+        grid-template-columns: 90px 1fr 1fr;
+        align-items: center;
+        border-bottom: 1px solid var(--line);
+        padding: 22px 0;
+        transition: padding 0.35s;
+        background: transparent;
+      }
+      .format:hover {
+        padding-left: 18px;
+        padding-right: 18px;
+        background: linear-gradient(
+          90deg,
+          rgba(240, 0, 120, 0.12),
+          transparent
+        );
+      }
+      .format-num {
+        font: 11px var(--mono);
+        color: var(--muted);
+      }
+      .format h3 {
+        font: clamp(25px, 3.7vw, 54px) var(--display);
+        margin: 0;
+        letter-spacing: 0.02em;
+      }
+      .format p {
+        justify-self: end;
+        color: var(--muted);
+        font-size: 13px;
+        max-width: 280px;
+        margin: 0;
+      }
+      .services {
+        background: #050505;
+      }
+      .service-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--line);
+        border: 1px solid var(--line);
+      }
+      .service {
+        background: var(--black);
+        padding: 31px;
+        min-height: 220px;
+        transition: background 0.35s;
+      }
+      .service:hover {
+        background: #151015;
+      }
+      .service-num {
+        font: 11px var(--mono);
+        color: #777;
+      }
+      .service h3 {
+        font-size: 20px;
+        margin: 46px 0 10px;
+      }
+      .service p {
+        font-size: 13px;
+        color: var(--muted);
+        margin: 0;
+        line-height: 1.5;
+      }
+      .portfolio {
+        background: #0c0c0e;
+      }
+      .portfolio-track {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .portfolio-item {
+        position: relative;
+        min-height: 420px;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #161519;
+      }
+      .portfolio-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.78;
+        transition:
+          transform 0.7s,
+          opacity 0.4s;
+      }
+      .portfolio-item:hover img {
+        transform: scale(1.04);
+        opacity: 1;
+      }
+      .portfolio-item:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.78), transparent 60%);
+      }
+      .portfolio-caption {
+        position: absolute;
+        z-index: 1;
+        inset: auto 22px 22px;
+      }
+      .portfolio-caption h3 {
+        font-size: 24px;
+        margin: 5px 0;
+      }
+      .portfolio-caption p {
+        font: 10px var(--mono);
+        color: #ccc;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+      .empty-note {
+        display: block;
+        font-size: 11px;
+        color: #8e8a8e;
+        margin-top: 18px;
+      }
+      .steps {
+        background: #f0edeb;
+        color: #090909;
+      }
+      .steps .eyebrow,
+      .steps .section-number {
+        color: #6f6a6b;
+      }
+      .step-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-top: 1px solid #c7c3c1;
+      }
+      .step {
+        padding: 28px 25px 15px 0;
+        border-right: 1px solid #c7c3c1;
+        margin-right: 25px;
+      }
+      .step:last-child {
+        border: 0;
+      }
+      .step-num {
+        font: 44px var(--mono);
+        color: #aaa5a5;
+      }
+      .step h3 {
+        font-size: 20px;
+        margin: 55px 0 12px;
+      }
+      .step p {
+        color: #6d6869;
+        line-height: 1.5;
+        font-size: 14px;
+        max-width: 245px;
+      }
+      .contact {
+        background:
+          linear-gradient(rgba(5, 5, 5, 0.68), rgba(5, 5, 5, 0.78)),
+          url("assets/orange-green-decoration.jpg") center / cover no-repeat;
+        color: #fff;
+      }
+      .contact .eyebrow:before {
+        background: #fff;
+      }
+      .contact .display {
+        font-size: clamp(48px, 8vw, 112px);
+      }
+      .contact-grid {
+        display: flex;
+        justify-content: space-between;
+        gap: 50px;
+        align-items: flex-end;
+      }
+      .contact-aside {
+        max-width: 260px;
+      }
+      .contact-aside p {
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .contact-links {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 28px;
+      }
+      .social-link {
+        width: 42px;
+        height: 42px;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        color: #fff;
+        transition:
+          transform 0.3s,
+          background 0.3s,
+          border-color 0.3s;
+      }
+      .social-link:hover,
+      .social-link:focus-visible {
+        transform: translateY(-3px);
+        background: rgba(255, 255, 255, 0.16);
+        border-color: #fff;
+      }
+      .social-link svg {
+        width: 18px;
+        height: 18px;
+        fill: currentColor;
+      }
+      .footer {
+        padding: 48px 0 24px;
+        background: #050505;
+      }
+      .footer-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 25px;
+        padding-bottom: 70px;
+      }
+      .footer-brand p {
+        font: 11px var(--mono);
+        color: var(--muted);
+        letter-spacing: 0.13em;
+        margin-top: 17px;
+      }
+      .footer-nav-columns {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        gap: 70px;
+      }
+      .footer-column {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+      }
+      .footer-column-title {
+        margin: 0 0 5px;
+        font: 11px var(--mono);
+        letter-spacing: 0.14em;
+        color: #fff;
+        text-transform: uppercase;
+      }
+      .footer-links {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font: 12px var(--ui);
+        text-transform: none;
+        color: #aaa;
+      }
+      .footer-links a:hover {
+        color: #fff;
+      }
+      .footer-links .social-link {
+        width: 34px;
+        height: 34px;
+      }
+      .footer-links .social-link svg {
+        width: 15px;
+        height: 15px;
+      }
+      .footer-bottom {
+        border-top: 1px solid var(--line);
+        padding-top: 18px;
+        display: flex;
+        justify-content: space-between;
+        font: 10px var(--mono);
+        color: #777;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: none;
+      }
+      @media (max-width: 800px) {
+        :root {
+          --pad: 22px;
+        }
+        .nav-links,
+        .nav .nav-cta {
+          display: none;
+        }
+        .menu-toggle {
+          display: block;
+        }
+        .mobile-menu {
+          display: flex;
+          position: fixed;
+          inset: 82px 0 0;
+          min-height: calc(100svh - 82px);
+          background: rgba(5, 5, 5, 0.84);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border-top: 1px solid var(--line);
+          padding: 42px var(--pad);
+          flex-direction: column;
+          gap: 0;
+          transform: translateX(100%);
+          transition: transform 0.45s cubic-bezier(0.77, 0, 0.18, 1);
+          z-index: 30;
+          overflow-y: auto;
+          isolation: isolate;
+        }
+        .menu-open .mobile-menu {
+          transform: none;
+        }
+        .mobile-menu a {
+          font: 600 clamp(28px, 9vw, 48px) var(--ui);
+          text-transform: none;
+          padding: 14px 0;
+          border-bottom: 1px solid var(--line);
+        }
+        .mobile-menu .btn {
+          font: 700 12px var(--ui);
+          margin-top: 28px;
+          align-self: flex-start;
+        }
+        .hero {
+          height: max(108svh, 760px);
+          min-height: 760px;
+          padding-top: 100px;
+          padding-bottom: 72px;
+        }
+        .scroll-cue {
+          display: none;
+        }
+        .section-head {
+          display: block;
+          margin-bottom: 48px;
+        }
+        .section-number {
+          display: block;
+          margin-top: 20px;
+        }
+        .feature-grid,
+        .service-grid,
+        .step-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .feature {
+          margin: 0;
+          padding: 25px 15px 30px 0;
+        }
+        .feature:nth-child(2) {
+          border-right: 0;
+          margin: 0;
+          padding-left: 15px;
+        }
+        .feature:nth-child(4) {
+          border-right: 0;
+          margin: 0;
+          padding-left: 15px;
+        }
+        .setup-grid {
+          display: block;
+        }
+        .setup,
+        .setup:nth-child(1) {
+          min-height: 0;
+          height: 72vw;
+          margin-bottom: 14px;
+        }
+        .setup:nth-child(1) {
+          height: 100vw;
+        }
+        .transform-grid {
+          grid-template-columns: 1fr;
+          gap: 34px;
+        }
+        .transform-copy {
+          order: 1;
+        }
+        .transform-video-wrap {
+          order: 2;
+          width: min(48vw, 260px);
+          justify-self: center;
+        }
+        .transform-list {
+          order: 3;
+        }
+        .quality-grid {
+          grid-template-columns: 1fr;
+        }
+        .quality-images img,
+        .quality-images img:first-child,
+        .quality-images img:last-child {
+          height: 57vw;
+          margin: 0;
+        }
+        .quality-info {
+          border-left: 0;
+          border-top: 1px solid #d5d1d0;
+          padding: 38px 0 0;
+        }
+        .quality-info p {
+          margin-bottom: 25px;
+        }
+        .tech-list {
+          margin-top: 35px;
+        }
+        .format {
+          grid-template-columns: 48px 1fr;
+          gap: 5px;
+        }
+        .format p {
+          grid-column: 2;
+          justify-self: start;
+          margin-top: 5px;
+        }
+        .portfolio-track {
+          grid-template-columns: 1fr;
+        }
+        .portfolio-item {
+          min-height: 105vw;
+        }
+        .contact-grid,
+        .footer-top {
+          display: block;
+        }
+        .contact-aside {
+          margin-top: 40px;
+        }
+        .footer-nav-columns {
+          display: block;
+          margin-top: 40px;
+        }
+        .footer-column + .footer-column {
+          margin-top: 34px;
+        }
+        .footer-links {
+          margin-top: 0;
+        }
+        .footer-bottom {
+          margin-top: 50px;
+          gap: 15px;
+          flex-direction: column;
+        }
+      }
+      @media (max-width: 420px) {
+        .hero-title {
+          font-size: clamp(48px, 14vw, 64px);
+        }
+        .feature-grid,
+        .service-grid {
+          grid-template-columns: 1fr;
+        }
+        .feature,
+        .feature:nth-child(2),
+        .feature:nth-child(4) {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+          padding: 24px 0;
+          margin: 0;
+        }
+        .feature:last-child {
+          border-bottom: 0;
+        }
+        .service {
+          min-height: 190px;
+        }
+        .service h3 {
+          margin-top: 30px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *:before,
+        *:after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="nav" id="top">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="PodHouse Alger, accueil"
+          ><img class="brand-logo" src="icons/logo.svg" alt="PodHouse Alger" /></a
+        >
+        <nav class="nav-links" aria-label="Navigation principale">
+          <a href="#studio">Studio</a><a href="#experience">Expérience</a
+          ><a href="#services">Services</a><a href="#creations">Créations</a
+          ><a href="#contact">Contact</a>
+        </nav>
+        <a class="btn primary nav-cta" href="#contact"
+          >Réserver <img class="arrow" src="icons/arrow-up-right-svgrepo-com.svg" alt="" aria-hidden="true" /></a
+        ><button
+          class="menu-toggle"
+          aria-label="Ouvrir le menu"
+          aria-expanded="false"
+        >
+          <span></span><span></span>
+        </button>
+      </div>
+      <nav class="mobile-menu" aria-label="Navigation mobile">
+        <a href="#studio">Studio</a><a href="#experience">Expérience</a
+        ><a href="#services">Services</a><a href="#creations">Créations</a
+        ><a href="#contact">Contact</a
+        ><a class="btn primary" href="#contact"
+          >Réserver une session <img class="arrow" src="icons/arrow-up-right-svgrepo-com.svg" alt="" aria-hidden="true" /></a
+        >
+      </nav>
+    </header>
+    <main>
+      <section class="hero" aria-label="Introduction">
+        <video
+          class="hero-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        >
+          <source src="assets/hero-video.mp4" type="video/mp4" />
+        </video>
+        <div class="container hero-content reveal">
+          <h1 class="display hero-title">
+            Votre contenu<br />mérite un studio<br /><em>à sa hauteur.</em>
+          </h1>
+          <p class="lead hero-copy">
+            Studio podcast haut de gamme à Alger. Production, réalisation et
+            création de contenu.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#contact"
+              >Réserver une session <img class="arrow" src="icons/arrow-up-right-svgrepo-com.svg" alt="" aria-hidden="true" /></a
+            ><a class="btn" href="#studio"
+              >Découvrir le studio <img class="arrow" src="icons/arrow-sm-right-svgrepo-com.svg" alt="" aria-hidden="true" /></a
+            >
+          </div>
+        </div>
+        <div class="scroll-cue">Défiler</div>
+      </section>
+      <section class="section experience" id="experience">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <div class="eyebrow">L'expérience PodHouse</div>
+              <h2 class="display">
+                Plus qu'un studio.<br /><em>Une expérience</em><br />de
+                production.
+              </h2>
+            </div>
+            <span class="section-number">01 / 13</span>
+          </div>
+          <p class="lead reveal">
+            Un espace pensé pour donner de la force à vos idées. Nous prenons en
+            charge l'environnement et la production technique, vous restez
+            concentré sur l'essentiel.
+          </p>
+          <div class="feature-grid reveal">
+            <article class="feature">
+              <div class="feature-num">01</div>
+              <h3>UN ESPACE PREMIUM</h3>
+              <p>
+                Des setups pensés pour donner à chaque production son identité.
+              </p>
+            </article>
+            <article class="feature">
+              <div class="feature-num">02</div>
+              <h3>UNE PRODUCTION PROFESSIONNELLE</h3>
+              <p>
+                Image, son, lumière et réalisation pensés pour un rendu
+                maîtrisé.
+              </p>
+            </article>
+            <article class="feature">
+              <div class="feature-num">03</div>
+              <h3>UN ACCOMPAGNEMENT TECHNIQUE</h3>
+              <p>Vous créez. Notre équipe s'occupe de la technique.</p>
+            </article>
+            <article class="feature">
+              <div class="feature-num">04</div>
+              <h3>DU TOURNAGE AU CONTENU</h3>
+              <p>Transformez une session en contenu prêt à être diffusé.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section studio" id="studio">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <div class="eyebrow">Le studio</div>
+              <h2 class="display">
+                Un espace.<br /><em>Plusieurs univers.</em>
+              </h2>
+            </div>
+            <span class="section-number">02 / 13</span>
+          </div>
+          <div class="setup-grid reveal">
+            <article class="setup">
+              <img
+                src="assets/white-decoration.jpg"
+                alt="Setup studio aux tons blancs"
+              />
+              <div class="setup-overlay">
+                <span class="mono">01 — SETUP</span>
+                <h3>Blanc Studio</h3>
+                <p>Une lumière nette pour des conversations essentielles.</p>
+              </div>
+            </article>
+            <article class="setup">
+              <img
+                src="assets/orange-white-decoration.jpg"
+                alt="Setup studio orange et blanc"
+                loading="lazy"
+              />
+              <div class="setup-overlay">
+                <span class="mono">02 — SETUP</span>
+                <h3>Orange Blanc</h3>
+                <p>Un contraste graphique, une présence affirmée.</p>
+              </div>
+            </article>
+            <article class="setup">
+              <img
+                src="assets/orange-green-decoration.jpg"
+                alt="Setup studio orange et vert"
+                loading="lazy"
+              />
+              <div class="setup-overlay">
+                <span class="mono">03 — SETUP</span>
+                <h3>Orange Vert</h3>
+                <p>Une atmosphère vive pour des formats singuliers.</p>
+              </div>
+            </article>
+            <article class="setup">
+              <img
+                src="assets/green-table-decoration.jpg"
+                alt="Setup studio avec table verte"
+                loading="lazy"
+              />
+              <div class="setup-overlay">
+                <span class="mono">04 — SETUP</span>
+                <h3>Green Table</h3>
+                <p>Un décor chaleureux pour donner du relief aux échanges.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section transformation" id="transformation">
+        <div class="container">
+          <div class="transform-grid">
+            <div class="transform-copy reveal">
+              <div class="eyebrow">La transformation</div>
+              <h2 class="display">
+                Tout commence<br />par un espace<br /><em>vide.</em>
+              </h2>
+              <p class="lead">Puis la production prend place.</p>
+            </div>
+            <div class="transform-video-wrap reveal">
+              <video
+                class="transform-video"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+              >
+                <source
+                  src="assets/decoration-transform-video.mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </div>
+            <ol class="transform-list reveal">
+              <li>VIDE <span>01</span></li>
+              <li>LUMIÈRE <span>02</span></li>
+              <li>CAMÉRA <span>03</span></li>
+              <li>SON <span>04</span></li>
+              <li>SET <span>05</span></li>
+              <li>PODHOUSE <span>06</span></li>
+            </ol>
+          </div>
+        </div>
+      </section>
+      <section class="section quality" id="qualite">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <div class="eyebrow">Derrière chaque plan</div>
+              <h2 class="display">
+                La qualité<br />se joue dans<br /><em>les détails.</em>
+              </h2>
+            </div>
+            <span class="section-number">04 / 13</span>
+          </div>
+          <div class="quality-grid">
+            <div class="quality-images reveal">
+              <img
+                src="assets/orange-studio2.jpg"
+                alt="Deuxième angle du setup de production orange"
+                loading="lazy"
+              /><img
+                src="assets/orange-studio1.jpg"
+                alt="Caméra et setup de production orange"
+                loading="lazy"
+              />
+            </div>
+            <div class="quality-info reveal">
+              <h3>IMAGE</h3>
+              <p>
+                Des plans pensés pour donner de la profondeur à chaque
+                conversation.
+              </p>
+              <h3>SON</h3>
+              <p>Une captation claire et maîtrisée.</p>
+              <h3>LUMIÈRE</h3>
+              <p>
+                Une lumière travaillée pour mettre chaque intervenant en valeur.
+              </p>
+              <div class="tech-list">
+                <span>CAMÉRAS</span><span>AUDIO</span><span>ÉCLAIRAGE</span
+                ><span>RÉALISATION</span><span>MONITORING</span
+                ><span>POST-PRODUCTION</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section formats" id="creations">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <div class="eyebrow">Les formats</div>
+              <h2 class="display">
+                Un studio.<br /><em>Des possibilités</em><br />infinies.
+              </h2>
+            </div>
+            <span class="section-number">05 / 13</span>
+          </div>
+          <div class="format-list reveal">
+            <article class="format">
+              <span class="format-num">01</span>
+              <h3>PRODUCTION</h3>
+              <p>De l'installation du studio au tournage.</p>
+            </article>
+            <article class="format">
+              <span class="format-num">02</span>
+              <h3>RÉALISATION</h3>
+              <p>Une direction pensée pour chaque projet.</p>
+            </article>
+            <article class="format">
+              <span class="format-num">03</span>
+              <h3>CRÉATION DE CONTENU</h3>
+              <p>Des contenus prêts à être diffusés.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section services" id="services">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <div class="eyebrow">Ce que nous faisons</div>
+              <h2 class="display">
+                Tout ce qu'il faut<br /><em>pour produire.</em>
+              </h2>
+            </div>
+            <span class="section-number">06 / 13</span>
+          </div>
+          <div class="service-grid reveal">
+            <article class="service">
+              <span class="service-num">01</span>
+              <h3>STUDIO</h3>
+              <p>Location du studio et choix du setup.</p>
+            </article>
+            <article class="service">
+              <span class="service-num">02</span>
+              <h3>PRODUCTION</h3>
+              <p>Captation vidéo et réalisation.</p>
+            </article>
+            <article class="service">
+              <span class="service-num">03</span>
+              <h3>PODCAST</h3>
+              <p>Enregistrement audio et vidéo.</p>
+            </article>
+            <article class="service">
+              <span class="service-num">04</span>
+              <h3>POST-PRODUCTION</h3>
+              <p>Montage, traitement audio et finition.</p>
+            </article>
+            <article class="service">
+              <span class="service-num">05</span>
+              <h3>SHORT-FORM</h3>
+              <p>Déclinaison en contenus courts pour les réseaux.</p>
+            </article>
+            <article class="service">
+              <span class="service-num">06</span>
+              <h3>CRÉATION DE CONTENU</h3>
+              <p>Un accompagnement de la production à la diffusion.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section portfolio">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <div class="eyebrow">Les créations</div>
+              <h2 class="display">
+                Ce que nous<br /><em>avons déjà créé.</em>
+              </h2>
+            </div>
+            <span class="section-number">07 / 13</span>
+          </div>
+          <div class="portfolio-track reveal">
+            <article class="portfolio-item">
+              <img
+                src="assets/orange-studio1.jpg"
+                alt="Production PodHouse dans un setup orange"
+                loading="lazy"
+              />
+              <div class="portfolio-caption">
+                <span class="mono">Format studio</span>
+                <h3>Une production en devenir</h3>
+                <p>Podcast · vidéo</p>
+              </div>
+            </article>
+            <article class="portfolio-item">
+              <img
+                src="assets/white-studio.jpg"
+                alt="Espace de studio blanc"
+                loading="lazy"
+              />
+              <div class="portfolio-caption">
+                <span class="mono">Format studio</span>
+                <h3>Le cadre de vos idées</h3>
+                <p>Interview · contenu</p>
+              </div>
+            </article>
+            <article class="portfolio-item">
+              <img
+                src="assets/orange-studio2.jpg"
+                alt="Setup de production orange"
+                loading="lazy"
+              />
+              <div class="portfolio-caption">
+                <span class="mono">Votre projet</span>
+                <h3>À écrire avec nous</h3>
+                <p>Disponible à Alger</p>
+              </div>
+            </article>
+          </div>
+          <span class="empty-note"
+            >Les projets affichés ici pourront être remplacés par vos
+            réalisations.</span
+          >
+        </div>
+      </section>
+      <section class="section steps">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <div class="eyebrow">Le déroulé</div>
+              <h2 class="display">Votre projet<br /><em>en 3 étapes.</em></h2>
+            </div>
+            <span class="section-number">09 / 13</span>
+          </div>
+          <div class="step-grid reveal">
+            <article class="step">
+              <div class="step-num">01</div>
+              <h3>RÉSERVEZ</h3>
+              <p>Choisissez votre session et échangez avec notre équipe.</p>
+            </article>
+            <article class="step">
+              <div class="step-num">02</div>
+              <h3>VENEZ CRÉER</h3>
+              <p>Le studio est prêt. Concentrez-vous sur votre contenu.</p>
+            </article>
+            <article class="step">
+              <div class="step-num">03</div>
+              <h3>REPARTEZ AVEC DU CONTENU</h3>
+              <p>Votre production est prête à être exploitée et diffusée.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section contact" id="contact">
+        <div class="container">
+          <div class="contact-grid">
+            <div class="reveal">
+              <div class="eyebrow">Le point de départ</div>
+              <h2 class="display">On se retrouve<br /><em>à Alger.</em></h2>
+            </div>
+            <div class="contact-aside reveal">
+              <strong>PODHOUSE ALGER</strong>
+              <p>
+                La maison du podcast.<br />Adresse et disponibilités
+                communiquées lors de la prise de contact.
+              </p>
+              <div class="contact-links">
+                <a class="social-link" href="#contact" aria-label="Facebook">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M14 8h3V4h-3c-3.3 0-5 1.7-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.7.3-1 1-1Z" />
+                  </svg>
+                </a>
+                <a class="social-link" href="#contact" aria-label="Instagram">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2" />
+                    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2" />
+                    <circle cx="17.5" cy="6.5" r="1.2" />
+                  </svg>
+                </a>
+                <a class="social-link" href="#contact" aria-label="WhatsApp">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.5 0 .2 5.3.2 11.9c0 2.1.5 4.1 1.6 5.9L.1 24l6.4-1.7a11.9 11.9 0 0 0 5.6 1.4h.1c6.5 0 11.8-5.3 11.8-11.9 0-3.2-1.2-6.1-3.5-8.3Zm-8.3 17.8h-.1c-1.7 0-3.4-.5-4.8-1.3l-.3-.2-3.8 1 1-3.7-.2-.3a9.8 9.8 0 0 1-1.5-5.2C2.5 6.2 6.9 1.9 12.1 1.9c2.5 0 4.9 1 6.7 2.8a9.5 9.5 0 0 1 2.8 6.8c0 5.4-4.2 9.8-9.4 9.8Zm5.4-7.3c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.6-.8-2.7-1.4-3.8-3.2-.3-.5.3-.5.8-1.7.1-.2 0-.4 0-.6l-.6-1.5c-.2-.4-.4-.4-.7-.4h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.2.2 2.2 3.4 5.4 4.7 2 .8 2 .5 2.4.5.4 0 1.8-.7 2-1.4.2-.7.2-1.3.1-1.4Z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a class="brand" href="#top"
+              ><img class="brand-logo" src="icons/logo.svg" alt="PodHouse Alger" /></a
+            >
+            <p>LA MAISON DU PODCAST</p>
+          </div>
+          <div class="footer-nav-columns">
+            <nav class="footer-column" aria-label="Navigation principale du pied de page">
+              <h3 class="footer-column-title">Le studio</h3>
+              <div class="footer-links">
+                <a href="#studio">Studio</a>
+                <a href="#experience">Expérience</a>
+                <a href="#services">Services</a>
+              </div>
+            </nav>
+            <nav class="footer-column" aria-label="Suite de la navigation du pied de page">
+              <h3 class="footer-column-title">Votre projet</h3>
+              <div class="footer-links">
+                <a href="#creations">Créations</a>
+                <a href="#contact">Contact</a>
+              </div>
+            </nav>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 PodHouse Alger</span><span>La maison du podcast</span>
+        </div>
+      </div>
+    </footer>
+    <script>
+      const nav = document.querySelector(".nav");
+      const menuToggle = document.querySelector(".menu-toggle");
+      const body = document.body;
+      window.addEventListener(
+        "scroll",
+        () => nav.classList.toggle("scrolled", window.scrollY > 30),
+        { passive: true },
+      );
+      menuToggle.addEventListener("click", () => {
+        const open = body.classList.toggle("menu-open");
+        menuToggle.setAttribute("aria-expanded", String(open));
+        menuToggle.setAttribute(
+          "aria-label",
+          open ? "Fermer le menu" : "Ouvrir le menu",
+        );
+      });
+      document.querySelectorAll(".mobile-menu a").forEach((link) =>
+        link.addEventListener("click", () => {
+          body.classList.remove("menu-open");
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.setAttribute("aria-label", "Ouvrir le menu");
+        }),
+      );
+      const reveals = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          }),
+        { threshold: 0.12 },
+      );
+      reveals.forEach((item) => observer.observe(item));
+    </script>
+  </body>
+</html>
